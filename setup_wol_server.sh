@@ -43,4 +43,4 @@ sudo systemctl restart wakeonlan.service
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 echo ""
-echo "✅ Setup complete. The server should be running at: http://${LOCAL_IP}:8080"
+echo "✅ Setup complete. The server should be running at: http://${LOCAL_IP}:41264"
