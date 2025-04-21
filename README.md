@@ -13,7 +13,7 @@ A lightweight web interface running on a Raspberry Pi to remotely wake and check
 
 ---
 
-## 📦 Installation
+## Installation
 
 On your **Raspberry Pi**:
 
