@@ -1,4 +1,4 @@
-# 🖥️ Wake-on-LAN Server (Flask + Tailwind UI)
+# Wake-on-LAN Server (Flask + Tailwind UI)
 
 A lightweight web interface running on a Raspberry Pi to remotely wake and check the status of your Windows PC using Wake-on-LAN.
 
