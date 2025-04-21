@@ -18,7 +18,7 @@ A lightweight web interface running on a Raspberry Pi to remotely wake and check
 On your **Raspberry Pi**:
 
 ```bash
-git clone https://github.com/SyntaXcg/wakeonlan-server
+git clone https://github.com/julienrollin/wakeonlan-server
 cd wakeonlan-server
 chmod +x setup_wol_server.sh
 ./setup_wol_server.sh
