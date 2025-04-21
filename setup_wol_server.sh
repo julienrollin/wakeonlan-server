@@ -2,24 +2,25 @@
 
 echo "==== Wake-on-LAN Flask Server Setup ===="
 
-read -p "Enter your username (used for home directory): " USERNAME
-
-APP_DIR="/home/$USERNAME/wakeonlan-server"
+USERNAME=$(whoami)
+USER_HOME="/home/$USERNAME"
+INSTALL_DIR="$USER_HOME/wakeonlan-server"
 
 echo "[1/5] Creating application directory..."
-mkdir -p "$APP_DIR"
+mkdir -p "$INSTALL_DIR"
 
-cd "$APP_DIR" || exit 1
+echo "[2/5] Copying files to $INSTALL_DIR..."
+cp wake_server.py requirements.txt "$INSTALL_DIR"
 
-echo "[2/5] Creating virtual environment..."
-python3 -m venv venv
-source venv/bin/activate
+echo "[3/5] Creating virtual environment..."
+python3 -m venv "$INSTALL_DIR/venv"
 
-echo "[3/5] Installing dependencies..."
+echo "[4/5] Installing dependencies..."
+source "$INSTALL_DIR/venv/bin/activate"
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r "$INSTALL_DIR/requirements.txt"
 
-echo "[4/5] Creating systemd service..."
+echo "[5/5] Creating systemd service..."
 
 SERVICE_FILE="/etc/systemd/system/wakeonlan.service"
 sudo bash -c "cat > $SERVICE_FILE" <<EOL
@@ -29,18 +30,17 @@ After=network.target
 
 [Service]
 User=$USERNAME
-WorkingDirectory=$APP_DIR
-ExecStart=$APP_DIR/venv/bin/python3 wake_server.py
+WorkingDirectory=$INSTALL_DIR
+ExecStart=$INSTALL_DIR/venv/bin/python3 wake_server.py
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 EOL
 
-echo "[5/5] Enabling and starting service..."
-sudo systemctl daemon-reexec
+echo "Enabling and starting service..."
 sudo systemctl daemon-reload
 sudo systemctl enable wakeonlan.service
 sudo systemctl start wakeonlan.service
 
-echo "Setup complete. The server should now be running on port 8080."
+echo "✅ Setup complete. The server should be running at http://<your-ip>:8080"
