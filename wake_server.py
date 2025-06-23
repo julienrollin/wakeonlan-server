@@ -6,8 +6,8 @@ import subprocess
 app = Flask(__name__)
 
 # Configuration
-MAC_ADDRESS = '74:56:3C:68:50:22'
-IP_PC = '192.168.1.91'
+MAC_ADDRESS = 'YOUR MAC ADRESS'
+IP_PC = 'YOUR IP'
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
