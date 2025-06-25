@@ -53,11 +53,9 @@ sudo systemctl restart wakeonlan.service
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 echo ""
-echo "✅ Setup complete. The server should be running at: http://${LOCAL_IP}:41264"
+echo "✅ Setup complete! Now edit wake_server.py (nano wake_server.py) to add your MAC and IP:" 
 echo ""
-echo "⚠️  Now edit wake_server.py to add your MAC and IP:"
-echo "MAC_ADDRESS = 'your_mac_here'"
-echo "IP_PC = 'your_ip_here'"
+echo "The server should be running on your PC at: http://${LOCAL_IP}:41264" 
 
 deactivate
 exit 0
