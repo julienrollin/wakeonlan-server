@@ -6,8 +6,8 @@ import getpass
 
 app = Flask(__name__)
 
-MAC_ADDRESS = '74:56:3C:68:50:22'
-IP_PC = '192.168.1.91'
+MAC_ADDRESS = 'YOUR_MAC_ADDRESS'
+IP_PC = 'YOUR_PC_LOCAL_IP'
 
 USERNAME = getpass.getuser()
 
