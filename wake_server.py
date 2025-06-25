@@ -17,7 +17,7 @@ HTML_TEMPLATE = """
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PC Remote Panel</title>
+  <title>PC Remote Control</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -31,45 +31,15 @@ HTML_TEMPLATE = """
     }
   </style>
 </head>
-<body class="bg-[#0f172a] text-white min-h-screen flex">
-  <!-- Sidebar -->
-  <aside class="w-20 bg-[#1e293b] flex flex-col items-center py-6 space-y-6">
-    <div class="text-blue-400 text-3xl font-bold">⚡</div>
-    <button title="Wake" class="text-blue-400 hover:text-white text-xl">🔌</button>
-    <button title="Stats" class="text-blue-400 hover:text-white text-xl">📊</button>
-    <button title="Settings" class="text-blue-400 hover:text-white text-xl">⚙️</button>
-  </aside>
-
-  <!-- Main panel -->
-  <main class="flex-1 p-10 fade-in">
-    <h1 class="text-4xl font-semibold text-cyan-300 mb-6">PC Remote Panel</h1>
-
-    <!-- Status -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-[#1e293b] rounded-xl p-6 shadow-md">
-        <h2 class="text-lg font-semibold mb-2">Wake PC</h2>
-        <p class="text-sm mb-4" style="color: {{ status_color }}">{{ status }}</p>
-        <form action="/wake" method="post">
-          <button class="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold shadow">Wake</button>
-        </form>
-      </div>
-
-      <div class="bg-[#1e293b] rounded-xl p-6 shadow-md">
-        <h2 class="text-lg font-semibold mb-4">System Stats</h2>
-        <p class="text-sm mb-2">CPU Usage: <span class="font-semibold text-cyan-300">{{ cpu }}%</span></p>
-        <p class="text-sm">RAM: <span class="font-semibold text-cyan-300">{{ ram }}</span></p>
-      </div>
-
-      <div class="bg-[#1e293b] rounded-xl p-6 shadow-md">
-        <h2 class="text-lg font-semibold mb-4">System Temperature</h2>
-        <p class="text-sm">Coming soon...</p>
-      </div>
-    </div>
-
-    <footer class="mt-10 text-xs text-gray-400">
-      Powered by Flask • {{ username }}'s Panel
-    </footer>
-  </main>
+<body class="bg-[#0f1624] text-[#e5e5e5] flex items-center justify-center min-h-screen p-4">
+  <div class="fade-in text-center space-y-6 bg-[#0a0b12] px-10 py-8 rounded-2xl shadow-xl border border-[#1c1f2e] max-w-md w-full">
+    <h1 class="text-3xl font-bold text-[#2962ff] tracking-wide">PC Remote Control</h1>
+    <p class="text-sm font-medium" style="color: {{ status_color }}">{{ status }}</p>
+    <form action="/wake" method="post">
+      <button class="w-full py-3 px-8 bg-[#2962ff] hover:bg-[#1e4ed8] hover:scale-105 transition-all duration-200 rounded-lg font-semibold shadow-md text-white">Wake</button>
+    </form>
+    <footer class="text-xs text-gray-500 mt-4">Powered by Flask • {{ username }}'s Panel</footer>
+  </div>
 </body>
 </html>
 """
@@ -78,7 +48,7 @@ HTML_TEMPLATE = """
 def home():
     response = os.system(f"ping -c 1 -W 1 {IP_PC} > /dev/null 2>&1")
     status = "PC is Online" if response == 0 else "PC is Offline"
-    status_color = "#22c55e" if response == 0 else "#ef4444"
+    status_color = "#00e676" if response == 0 else "#ff5252"
     return render_template_string(HTML_TEMPLATE, status=status, status_color=status_color, username=USERNAME)
 
 @app.route('/wake', methods=['POST'])
